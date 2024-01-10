@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private float _speed = 250.0f;
+    [SerializeField] private float _modifySpeed;
+
     private Rigidbody2D _rigidbody;
 
     private void Awake()
     {
+        _modifySpeed = 1.0f;
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -38,7 +42,16 @@ public class Ball : MonoBehaviour
                                         Random.Range(0.5f, 1.0f);
 
         Vector2 direction = new Vector2(x, y);
-        _rigidbody.AddForce(direction * this._speed);
+        _rigidbody.AddForce(direction * this._speed * _modifySpeed);
+    }
+
+    public void ChangeModifySpeed(float valueModify)
+    {
+        float maxModifySpeed = 1.5f;
+        if(_modifySpeed < maxModifySpeed)
+        {
+            _modifySpeed += valueModify;
+        }
     }
 
     private void CheckVelocityX()

@@ -9,6 +9,13 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _increaseScore;
     [SerializeField] private AudioSource _pongCollisionWall;
 
+    private float _mainAudioVolumeDefault;
+
+    private void Awake()
+    {
+        _mainAudioVolumeDefault = _mainAudio.volume;
+    }
+
     public void PongClickPlay()
     {
         _pongClick.Play();
@@ -21,11 +28,23 @@ public class AudioManager : MonoBehaviour
 
     public void IncreaseScorePlay()
     {
-        this._increaseScore.Play();
+        _increaseScore.Play();
     }
 
     public void PongCollisionWallPlay()
     {
         _pongCollisionWall.Play();
+    }
+
+    public void ToogleMusic()
+    {
+        if ( _mainAudio != null && _mainAudio.volume > 0 )
+        {
+            _mainAudio.volume = 0f;
+        }
+        else
+        {
+            _mainAudio.volume = _mainAudioVolumeDefault;
+        }
     }
 }

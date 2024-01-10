@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerPaddle : Paddle
 {
     private Vector2 _direction;
-    [SerializeField] private float speedPlayerPaddle = 10f;
+    [SerializeField] private float speedPlayerPaddle;
 
     private void Start()
     {
