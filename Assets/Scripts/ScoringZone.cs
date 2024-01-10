@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ScoringZone : MonoBehaviour
 {
-    public EventTrigger.TriggerEvent scoreTrigger;
+    [SerializeField] private EventTrigger.TriggerEvent scoreTrigger;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

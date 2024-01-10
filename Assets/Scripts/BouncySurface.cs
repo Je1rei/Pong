@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BouncySurface : MonoBehaviour
 {
+    [SerializeField] private AudioManager _audioManager;
     [SerializeField] private float _bounceStrength;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -12,6 +13,7 @@ public class BouncySurface : MonoBehaviour
 
         if(ball != null)
         {
+            _audioManager.PongClickPlay();
             Vector2 normal = collision.GetContact(0).normal;
             ball.AddForce(-normal * this._bounceStrength);
         }

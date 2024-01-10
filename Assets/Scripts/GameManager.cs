@@ -5,39 +5,57 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Ball ball;
-    public Paddle playerPaddle;
-    public Paddle computerPaddle;
+    [SerializeField] private AudioManager _audioManager; 
+    [SerializeField] private Ball _ball;
+    [SerializeField] private Paddle _playerPaddle;
+    [SerializeField] private Paddle _computerPaddle;
 
-    public Text playerScoreText;
-    public Text computerScoreText;
+    [SerializeField] private Text _playerScoreText;
+    [SerializeField] private Text _computerScoreText;
 
     private int _playerScore;
     private int _computerScore;
 
     public void PlayerScores()
     {
+        _audioManager.IncreaseScorePlay();
+
         _playerScore++;
-        this.playerScoreText.text = _playerScore.ToString();
+        SetScoresText();
 
         this.ResetRound();
     }
 
     public void ComputerScores()
     {
+        _audioManager.IncreaseScorePlay();
+
         _computerScore++;
-        this.computerScoreText.text = _computerScore.ToString();
+        SetScoresText();
 
         this.ResetRound();
     }
 
-    private void ResetRound()
+    public void ResetRound()
     {
-        this.playerPaddle.ResetPosition();
-        this.computerPaddle.ResetPosition();
+        this._playerPaddle.ResetPosition();
+        this._computerPaddle.ResetPosition();
 
-        this.ball.ResetPosition();
+        this._ball.ResetPosition();
 
-        this.ball.AddStartingForce();
+        this._ball.AddStartingForce();
+    }
+
+    public void ResetGame()
+    {
+        this._playerScore = 0;
+        this._computerScore = 0;
+        SetScoresText();
+    }
+
+    private void SetScoresText()
+    {
+        this._playerScoreText.text = _playerScore.ToString();
+        this._computerScoreText.text = _computerScore.ToString();
     }
 }
